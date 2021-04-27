@@ -3,7 +3,10 @@
 # This script is based on official nginx website:
 #   http://nginx.org/en/linux_packages.html#Ubuntu
 
-BASEDIR=$(dirname "$0")
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT_PATH=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+BASEDIR=$(dirname "$SCRIPT_PATH")
 
 # Update & install requirements
 apt update
