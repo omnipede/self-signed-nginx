@@ -15,24 +15,8 @@ fi
 # Directory where other shell scripts reside
 SCRIPT_DIR="$BASEDIR"/script
 
-# Update & install requirements
-apt update
-apt install curl gnupg2 ca-certificates lsb-release rpm -y
+# Install nginx
+sh "$SCRIPT_DIR"/nginx.sh
 
-# Write nginx repository to apt file
-echo "deb http://nginx.org/packages/mainline/ubuntu $(lsb_release -cs) nginx" \
-    | tee /etc/apt/sources.list.d/nginx.list
-
-printf "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
-    | tee /etc/apt/preferences.d/99nginx
-
-# Get nginx signing key
-curl -o /tmp/nginx_signing.key https://nginx.org/keys/nginx_signing.key
-gpg --dry-run --quiet --import --import-options show-only /tmp/nginx_signing.key
-mv /tmp/nginx_signing.key /etc/apt/trusted.gpg.d/nginx_signing.asc
-
-# Important. Must update apt before install nginx
-apt update
-apt install nginx -y
-
+# Configure nginx's SSL feature.
 sh "$SCRIPT_DIR"/ssl.sh
