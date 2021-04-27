@@ -5,12 +5,15 @@
 
 # Absolute path this script is in, thus /home/user/bin
 CURRENT_DIR=$(pwd)
-BASEDIR=$(dirname $0)
+BASEDIR=$(dirname "$0")
 
 if [ "$BASEDIR" = '.' ]
 then
   BASEDIR="$CURRENT_DIR"
 fi
+
+# Directory where other shell scripts reside
+SCRIPT_DIR="$BASEDIR"/script
 
 # Update & install requirements
 apt update
@@ -32,35 +35,4 @@ mv /tmp/nginx_signing.key /etc/apt/trusted.gpg.d/nginx_signing.asc
 apt update
 apt install nginx -y
 
-# Install openssl via rpm
-rpm -qa openssl
-
-# Create ssl key & cert files
-mkdir ssl
-cd ssl || exit
-openssl genrsa -des3 -out server.key -passout pass:FOOBAR 2048
-openssl req -new -key server.key -out server.csr \
-  -subj "/C=KR/ST=SEOUL/L=PANGYO/O=server/OU=dev/CN=server" \
-  -passin pass:FOOBAR
-cp server.key server.key.origin
-openssl rsa -in server.key.origin -out server.key -passin pass:FOOBAR
-openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-
-# NGINX ssl configuration
-cd /etc/nginx || exit
-mkdir ssl
-cp "$BASEDIR"/ssl/server.key ./ssl/server.key
-cp "$BASEDIR"/ssl/server.crt ./ssl/server.crt
-
-mkdir snippets
-cp "$BASEDIR"/conf/self-signed.conf ./snippets/
-
-openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 4096
-
-cp "$BASEDIR"/conf/ssl-params.conf /etc/nginx/snippets/ssl-params.conf
-chmod 644 /etc/nginx/snippets/ssl-params.conf
-
-cp "$BASEDIR"/conf/default.conf /etc/nginx/conf.d/default.conf
-
-# Finish
-cd "$BASEDIR" || exit
+sh "$SCRIPT_DIR"/ssl.sh
