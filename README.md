@@ -11,7 +11,7 @@ First, execute installation script inside this project folder.
 $ pwd
 /path/to/this/repo
 
-$ sudo sh install.sh
+$ sudo sh start.sh
 ```
 
 After installation, write following nginx ```*.conf``` file on ```/etc/nginx/conf.d``` folder.
@@ -69,4 +69,3 @@ for multiple times of nginx installation while developing this script.
 * Add "yes or no" input prompt at the start of the script. 
 * Add self-signed ssl test script.
 * Export secret string to configurations.
-* Split installation script and configuration script.
