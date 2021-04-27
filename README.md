@@ -11,7 +11,7 @@ First, execute installation script inside this project folder.
 $ pwd
 /path/to/this/repo
 
-$ sudo install.sh
+$ sudo sh install.sh
 ```
 
 After installation, write following nginx ```*.conf``` file on ```/etc/nginx/conf.d``` folder.
