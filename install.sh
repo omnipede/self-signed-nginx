@@ -3,7 +3,7 @@
 # This script is based on official nginx website:
 #   http://nginx.org/en/linux_packages.html#Ubuntu
 
-WORK_PATH=$(pwd)
+BASEDIR=$(dirname "$0")
 
 # Update & install requirements
 apt update
@@ -42,18 +42,18 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 # NGINX ssl configuration
 cd /etc/nginx || exit
 mkdir ssl
-cp "$WORK_PATH"/ssl/server.key ./ssl/server.key
-cp "$WORK_PATH"/ssl/server.crt ./ssl/server.crt
+cp "$BASEDIR"/ssl/server.key ./ssl/server.key
+cp "$BASEDIR"/ssl/server.crt ./ssl/server.crt
 
 mkdir snippets
-cp "$WORK_PATH"/conf/self-signed.conf ./snippets/
+cp "$BASEDIR"/conf/self-signed.conf ./snippets/
 
 openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 4096
 
-cp "$WORK_PATH"/conf/ssl-params.conf /etc/nginx/snippets/ssl-params.conf
+cp "$BASEDIR"/conf/ssl-params.conf /etc/nginx/snippets/ssl-params.conf
 chmod 644 /etc/nginx/snippets/ssl-params.conf
 
-cp "$WORK_PATH"/conf/default.conf /etc/nginx/conf.d/default.conf
+cp "$BASEDIR"/conf/default.conf /etc/nginx/conf.d/default.conf
 
 # Finish
-cd "$WORK_PATH" || exit
+cd "$BASEDIR" || exit
