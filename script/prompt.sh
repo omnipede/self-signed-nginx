@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # User input prompt
 while true; do
   printf "[!] This action will not be rolled back. Continue? [y/N] "

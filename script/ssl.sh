@@ -1,3 +1,7 @@
+#!/bin/sh
+
+# This script configure nginx SSL features.
+
 # Absolute path this script is in, thus /home/user/bin
 CURRENT_DIR=$(pwd)
 BASEDIR=$(dirname "$0")

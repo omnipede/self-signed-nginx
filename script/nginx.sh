@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script install mainline nginx
 
 # This script is based on official nginx website:

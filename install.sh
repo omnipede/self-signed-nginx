@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# This script is based on official nginx website:
-#   http://nginx.org/en/linux_packages.html#Ubuntu
-
 # Absolute path this script is in, thus /home/user/bin
 CURRENT_DIR=$(pwd)
 BASEDIR=$(dirname "$0")
