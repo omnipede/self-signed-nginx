@@ -5,7 +5,7 @@ ADD conf/ conf
 ADD script/ script
 ADD start.sh start.sh
 
-RUN ["chmod", "+x", "start.sh"]
 RUN ["chmod", "+x", "script"]
 
-RUN ["./start.sh"]
+RUN ["sh", "./script/nginx.sh"]
+RUN ["sh", "./script/ssl.sh"]

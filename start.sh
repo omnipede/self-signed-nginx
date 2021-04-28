@@ -12,7 +12,10 @@ fi
 # Directory where other shell scripts reside
 SCRIPT_DIR="$BASEDIR"/script
 
-# Install nginx
+# Prompt
+sh "$SCRIPT_DIR"/prompt.sh
+
+## Install nginx
 sh "$SCRIPT_DIR"/nginx.sh
 
 # Configure nginx's SSL feature.
