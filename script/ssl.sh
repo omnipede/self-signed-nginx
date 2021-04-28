@@ -9,7 +9,14 @@ if [ "$BASEDIR" = '.' ]
 then
   BASEDIR="$CURRENT_DIR"
 fi
+
 PARENT_DIR=$(dirname "$BASEDIR")
+
+if [ "$PARENT_DIR" = '.' ]
+then
+  PARENT_DIR="$CURRENT_DIR"
+fi
+
 # Path of nginx configuration directory
 CONF_DIR="$PARENT_DIR"/conf
 # Path of SSL secret files
@@ -29,7 +36,7 @@ cp server.key server.key.origin
 openssl rsa -in server.key.origin -out server.key -passin pass:FOOBAR
 openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-cd "$BASEDIR" || exit
+cd - || exit
 
 # NGINX ssl configuration
 mkdir /etc/nginx/ssl
