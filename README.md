@@ -6,7 +6,10 @@ Nginx self-signed SSL autoconfiguration script.
 
 ## How to use
 
-First, execute installation script inside this project folder.
+First, edit [start.conf](./start.conf) configuration file properly.
+
+Then execute installation script inside this project folder.
+
 ```
 $ pwd
 /path/to/this/repo
