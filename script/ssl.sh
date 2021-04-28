@@ -28,12 +28,12 @@ rpm -qa openssl
 # Create ssl key & cert files
 mkdir "$SSL_DIR"
 cd "$SSL_DIR" || exit
-openssl genrsa -des3 -out server.key -passout pass:FOOBAR 2048
+openssl genrsa -des3 -out server.key -passout pass:"$2" 2048
 openssl req -new -key server.key -out server.csr \
-  -subj "/C=KR/ST=SEOUL/L=PANGYO/O=server/OU=dev/CN=server" \
-  -passin pass:FOOBAR
+  -subj "$1" \
+  -passin pass:"$2"
 cp server.key server.key.origin
-openssl rsa -in server.key.origin -out server.key -passin pass:FOOBAR
+openssl rsa -in server.key.origin -out server.key -passin pass:"$2"
 openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 cd - || exit
