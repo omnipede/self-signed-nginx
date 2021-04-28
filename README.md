@@ -69,6 +69,4 @@ I've made [Dockerfile](./Dockerfile) for development of this shell script. You c
 for multiple times of nginx installation while developing this script.
 
 ## TODO 
-* Add "yes or no" input prompt at the start of the script. 
 * Add self-signed ssl test script.
-* Export secret string to configurations.
